@@ -43,4 +43,13 @@ const UserSchema = new mongoose.Schema ({
 	}
 }, {timestamps: true});
 
+UserSchema.virtual ('artwroks', {
+	ref: 'Artwork', // The model to search within
+	localField: '_id', // The user unique key
+	foreignField: 'artistId', // The field inside Artwork schema
+})
+
+UserSchema.set ('toJSON', {virtuals: true});
+UserSchema.set ('toObject', {virtuals: true});
+
 module.exports = mongoose.model ('User', UserSchema);
