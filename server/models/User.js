@@ -40,7 +40,19 @@ const UserSchema = new mongoose.Schema ({
 	rating: {
 		type: Number,
 		default: 0,
-	}
+	},
+	following: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		}
+	],
+	followers: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		}
+	],
 }, {timestamps: true});
 
 UserSchema.virtual ('artwroks', {
