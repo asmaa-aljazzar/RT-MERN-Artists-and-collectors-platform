@@ -1,13 +1,13 @@
 const mongoose = require ('mongoose');
 
 const UserSchema = new mongoose.Schema ({
-	username: {
+	username: { // ui appear after OAuth to ask about username
 		type: String,
 		required: [true, 'Please provide a unique username'],
 		unique: true,
 		trim: true,
 	},
-	email: {
+	email: { // email writen or using AOuth
 		type: String,
 		required: [true, "Please provide a unique email"],
 		unique: true,
@@ -21,7 +21,8 @@ const UserSchema = new mongoose.Schema ({
 			return !this.googleId && !this.facebookId;
 		},
 	},
-	googleId: {
+	// check if we using AOuth to check for passwrod requiring
+	googleId: { 
 		type: String,
 		required: false,
 	},
@@ -29,15 +30,15 @@ const UserSchema = new mongoose.Schema ({
 		type: String,
 		required: false,
 	},
-	isArtist: {
+	isArtist: { // to open more features
 		type: Boolean,
 		default: false,
 	},
-	isVerified: {
+	isVerified: { // to build trust when pay a workart
 		type: Boolean,
 		default: false,
 	},
-	rating: {
+	rating: { // set after each save or likes or just when pay - //todo: checkthis
 		type: Number,
 		default: 0,
 	},

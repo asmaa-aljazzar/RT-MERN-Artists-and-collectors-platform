@@ -14,10 +14,11 @@ const ArtworkSchema = new mongoose.Schema ({
 		type: String,
 		required: true,
 	},
-	// The size of the image
+	// The size of the image/ with default options
 	dimensions: {
 		type: String,
 	},
+	// if sold, write the price and sold, if not write price, if not for sale , there will be no price
 	price: {
 		type: Number,
 		default: 0,

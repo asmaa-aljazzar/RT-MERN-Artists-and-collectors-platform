@@ -2,6 +2,8 @@ const express = require ('express');
 const cors = require ('cors');
 require ('dotenv').config ()
 const { connectDB } = require ('./config/db');
+const authRoutes = require ('./routes/authRoutes');
+const userRoutes = require ('./routes/userRoutes');
 
 const app = express ();
 
@@ -16,9 +18,9 @@ app.get ("/api/health", (req, res) => {
 	res.json ({status: 'healthy', database: "Trying to connect..."});
 })
 
-// app.use ('/api/auth', authRoutes);
-// app.use ('/api/users', userRoutes);
-// app.use ('/api/artworks, artworkRoutes);
+app.use ('/api/auth', authRoutes);
+app.use ('/api/users', userRoutes);
+app.use ('/api/artworks', artworkRoutes);
 
 // env variables
 const PORT = process.env.PORT || 5002;
