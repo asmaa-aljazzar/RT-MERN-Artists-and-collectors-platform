@@ -8,7 +8,7 @@ const login = async (req, res) =>{
 	}
 }
 
-const register = async () =>{
+const register = async (req, res) =>{
 	try {
 		res.status (200).json ({message: "Register successful"});
 	}
@@ -17,7 +17,7 @@ const register = async () =>{
 	}
 }
 
-const forgotPassword = async () =>{
+const forgotPassword = async (req, res) =>{
 	try {
 		res.status (200).json ({message: "Forgot password successful"});
 	}
@@ -26,7 +26,7 @@ const forgotPassword = async () =>{
 	}
 }
 
-const resetPassword = async () =>{
+const resetPassword = async (req, res) =>{
 	try {
 		res.status (200).json ({message: "Reset password successful"});
 	}

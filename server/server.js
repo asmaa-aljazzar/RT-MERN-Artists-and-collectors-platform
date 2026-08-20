@@ -4,6 +4,8 @@ require ('dotenv').config ()
 const { connectDB } = require ('./config/db');
 const authRoutes = require ('./routes/authRoutes');
 const userRoutes = require ('./routes/userRoutes');
+const artworkRoutes = require ('./routes/artworkRoutes');
+const adminRoutes = require ('./routes/adminRoutes');
 
 const app = express ();
 
@@ -21,11 +23,18 @@ app.get ("/api/health", (req, res) => {
 app.use ('/api/auth', authRoutes);
 app.use ('/api/users', userRoutes);
 app.use ('/api/artworks', artworkRoutes);
+app.use ('/api/admin', adminRoutes);
 
 // env variables
 const PORT = process.env.PORT || 5002;
-const MONGO_URI = process.env.MONGO_URI;
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route not found: ${req.method} ${req.originalUrl}`,
+  });
+});
 
 // Server listening
 app.listen (PORT, () => console.log (`Server is running on port ${PORT}`));
-

@@ -22,6 +22,7 @@ const ArtworkSchema = new mongoose.Schema ({
 	price: {
 		type: Number,
 		default: 0,
+		min: 0,
 	},
 	isForSale: {
 		type: Boolean,
