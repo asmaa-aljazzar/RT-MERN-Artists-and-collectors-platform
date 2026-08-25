@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment files containing secrets
+.env
+.env.*
+!.env.example
+
+# Generated files
+dist/
+build/
+coverage/
+
+# Uploaded development files
+uploads/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
