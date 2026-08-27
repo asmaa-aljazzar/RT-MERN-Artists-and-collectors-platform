@@ -3,46 +3,56 @@ const mongoose = require ('mongoose');
 const ArtworkSchema = new mongoose.Schema ({
 	title: {
 		type: String,
+		maxlength: 50,
 		required: true,
 		trim: true,
 	},
 	description: {
 		type: String,
-		required: false,
+		maxlength: 2000,
+		default: "",
+		trim: true,
 	},
 	imageUrl: {
 		type: String,
 		required: true,
-	},
-	// The size of the image/ with default options
-	dimensions: {
-		type: String,
-	},
-	// if sold, write the price and sold, if not write price, if not for sale , there will be no price
-	price: {
-		type: Number,
-		default: 0,
-		min: 0,
-	},
-	isForSale: {
-		type: Boolean,
-		default: false,
+		trim: true,
 	},
 	category: {
 		type: String,
 		required: true,
+		trim: true,
+		lowercase: true,
+		enum: ["digital", "ai-generated", "traditional"]
 	},
 	tags: {
-		type: [String],
+		type: [{
+			type: String,
+			trim: true,
+			lowercase: true,
+			maxlength: 30,
+		}],
+		default: [],
+		validate: [
+			{
+				validator: (tags) => tags.length <= 10,
+			    message: "An artwork can have at most 10 tags",
+			},
+			{
+				validator: (tags) => new Set (tags).size === tags.length,
+				message: "Artwork tags must be unique",
+			}
+		]
 	},
 	artistId: {
-		type: mongoose.Schema.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 		required: true,
 	},
 },{timestamps: true});
 
-ArtworkSchema.set ('toJSON', {virtuals: true});
-ArtworkSchema.set ('toObject', {virtuals: true});
+ArtworkSchema.index ({artistId: 1});
+ArtworkSchema.index ({title: "text"});
+ArtworkSchema.index ({category: 1, createdAt: -1});
 
 module.exports = mongoose.model ('Artwork', ArtworkSchema);
