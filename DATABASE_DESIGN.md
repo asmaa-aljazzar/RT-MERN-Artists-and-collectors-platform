@@ -1,7 +1,7 @@
 # Database Design
 
 ## User fields
-- `username`: String, required, trimmed, lowercased, uniquely indexed; public user identity.
+- `username`: String, required, trimmed, lowercased, uniquely indexed; maximum: 30 characters; minimum: 3 characters; public user identity;
 - `email`: String, required, trimmed, lowercased, uniquely indexed; private login identifier.
 - `password`: String, required; stores the password hash used for authentication.
 - `isArtist`: Boolean, default false; determines whether the user can publish artwork.
@@ -11,7 +11,7 @@
 
 ## Artwork fields
 
-- `title`: String, required, trimmed, maximum 255 characters; stores the artwork name.
+- `title`: String, required, trimmed, maximum 50 characters; stores the artwork name.
 - `description`: String, optional, trimmed, maximum 2000 characters; stores the artwork's story, tools, or process.
 - `imageUrl`: String, required; stores the location of the artwork image.
 - `category`: String, required, trimmed, lowercased, restricted to `digital`, `ai-generated`, or `traditional`; supports consistent filtering.
